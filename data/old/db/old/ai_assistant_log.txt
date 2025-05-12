@@ -1,0 +1,17 @@
+
+--- 2025-05-08 15:35:03 ---
+Användare: hur många noder finns i spelträdet?
+AI: Tyvärr kan jag inte ge ett exakt svar på det eftersom jag som AI inte har direkt tillgång till databasen. Däremot kan du räkna antalet poster i tabellen "nodes" för att få reda på hur många noder som finns i spelträdet.
+--------------------------------------------------------------------------------
+
+--- 2025-05-08 15:35:20 ---
+Användare: okej prova nodes då?
+AI: Tabellen 'nodes' har följande kolumner: 
+- 'id' som är ett unikt identifikationsnummer för varje situation.
+- 'situation' som beskriver den specifika situationen i spelet.
+- 'position_id' som är kopplad till positionstabellen för att identifiera spelarens position.
+- 'parent_id' som hänvisar till den tidigare situationen.
+- 'node_path' som visar den sekventiella ordningen av spelhändelser.
+
+För att kunna ge dig mer specifik information behöver jag veta vilken typ av information du letar efter. Vill du veta mer om en specifik situation, position eller sekvens av händelser?
+--------------------------------------------------------------------------------

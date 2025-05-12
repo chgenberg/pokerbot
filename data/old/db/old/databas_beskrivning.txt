@@ -1,0 +1,82 @@
+
+DATABASBESKRIVNING - POKER STRATEGY DATABASE
+Skapad: 2025-05-08 14:53:03
+Sökväg: C:\Users\Propietario\Desktop\data\db\poker_strategy.db
+
+TABELLSTRUKTUR:
+===============
+
+1. positions
+   - id: Unikt ID för position
+   - name: Positionsnamn (utg, hj, co, btn, sb, bb)
+
+2. actions
+   - id: Unikt ID för aktionstyp
+   - action_type: Typ av aktion (fold, call, check, raise)
+
+3. nodes
+   - id: Unikt ID för beslutspunkt i spelträdet
+   - situation: String som beskriver tidigare aktioner
+   - position_id: ID för spelaren som ska agera
+   - parent_id: ID för föräldranod (NULL för rot)
+   - node_path: Faktisk sökväg i mappstrukturen
+
+4. hands
+   - id: Unikt ID för pokerhanden
+   - hand_code: Original handkod (t.ex. "8s7d")
+   - canonical_code: Normaliserad handkod
+   - first_rank, first_suit: Första kortets värde och färg
+   - second_rank, second_suit: Andra kortets värde och färg
+
+5. strategies
+   - id: Unikt ID för strategi
+   - node_id: Beslutspunkt
+   - hand_id: Hand
+   - action_type_id: Typ av aktion
+   - action_code: Original aktionskod (t.ex. "r25")
+   - raise_amount: Extraherat raise-belopp om aktion är raise
+   - frequency: Frekvens (0-1) för denna strategi
+
+INDEXERING:
+===========
+- idx_nodes_situation: Index på nodes.situation
+- idx_nodes_position: Index på nodes.position_id
+- idx_hands_canonical: Index på hands.canonical_code
+- idx_strategies_node: Index på strategies.node_id
+- idx_strategies_hand: Index på strategies.hand_id
+- idx_strategies_combined: Index på (node_id, hand_id)
+
+DATAFLÖDE:
+==========
+1. Mappnamn (t.ex. "ffr25fr160_btn") parsas till situation ("ffr25fr160") och position ("btn").
+2. Noden registreras i databasen med koppling till föräldranoden.
+3. För varje aktion i all_expanded.json:
+   - Aktionskod och typ extraheras.
+   - För varje hand och dess frekvens:
+     - Handen normaliseras och sparas.
+     - Strategin sparas med koppling till nod, hand och aktion.
+
+EXEMPELFRÅGOR:
+==============
+-- Hitta optimala händer för 3-bet från CO mot UTG
+SELECT h.canonical_code, s.frequency, s.raise_amount
+FROM strategies s
+JOIN hands h ON s.hand_id = h.id
+JOIN nodes n ON s.node_id = n.id
+JOIN actions a ON s.action_type_id = a.id
+WHERE n.situation = 'r25' 
+AND n.position_id = (SELECT id FROM positions WHERE name = 'co')
+AND a.action_type = 'raise'
+ORDER BY s.frequency DESC
+LIMIT 20;
+
+-- Hitta alla händer som alltid foldas i en specifik situation
+SELECT h.canonical_code
+FROM strategies s
+JOIN hands h ON s.hand_id = h.id
+JOIN nodes n ON s.node_id = n.id
+JOIN actions a ON s.action_type_id = a.id
+WHERE n.situation = 'r25fr90' 
+AND n.position_id = (SELECT id FROM positions WHERE name = 'bb')
+AND a.action_type = 'fold'
+AND s.frequency = 1.0;

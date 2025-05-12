@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Databasschema - poker_strategy.db</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; }
+        h1, h2, h3 { color: #2c3e50; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { text-align: left; padding: 8px; border: 1px solid #ddd; }
+        th { background-color: #f2f2f2; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .table-container { margin-bottom: 40px; padding: 10px; border: 1px solid #eee; border-radius: 5px; }
+        .fk { color: #3498db; }
+        .pk { color: #e74c3c; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Databasschema: poker_strategy.db</h1>
+    <p>Genererad: 2025-05-08 15:32</p>
+    <h2>Tabellöversikt</h2>
+    <ul>
+        <li><a href="#positions">positions</a></li>
+        <li><a href="#actions">actions</a></li>
+        <li><a href="#nodes">nodes</a></li>
+        <li><a href="#hands">hands</a></li>
+        <li><a href="#strategies">strategies</a></li>
+    </ul>
+
+    <div class="table-container" id="positions">
+        <h2>Tabell: positions</h2>
+        
+        <h3>Kolumner</h3>
+        <table>
+            <tr>
+                <th>Namn</th>
+                <th>Typ</th>
+                <th>Not Null</th>
+                <th>Default</th>
+                <th>Primary Key</th>
+            </tr>
+
+            <tr>
+                <td class="pk">id</td>
+                <td>INTEGER</td>
+                <td>Nej</td>
+                <td></td>
+                <td>Ja</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>TEXT</td>
+                <td>Ja</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+        </table>
+
+        <h3>Dataexempel</h3>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>utg</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>hj</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>co</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>btn</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>sb</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="table-container" id="actions">
+        <h2>Tabell: actions</h2>
+        
+        <h3>Kolumner</h3>
+        <table>
+            <tr>
+                <th>Namn</th>
+                <th>Typ</th>
+                <th>Not Null</th>
+                <th>Default</th>
+                <th>Primary Key</th>
+            </tr>
+
+            <tr>
+                <td class="pk">id</td>
+                <td>INTEGER</td>
+                <td>Nej</td>
+                <td></td>
+                <td>Ja</td>
+            </tr>
+            <tr>
+                <td>action_type</td>
+                <td>TEXT</td>
+                <td>Ja</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+        </table>
+
+        <h3>Dataexempel</h3>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>action_type</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>fold</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>call</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>check</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>raise</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="table-container" id="nodes">
+        <h2>Tabell: nodes</h2>
+        
+        <h3>Kolumner</h3>
+        <table>
+            <tr>
+                <th>Namn</th>
+                <th>Typ</th>
+                <th>Not Null</th>
+                <th>Default</th>
+                <th>Primary Key</th>
+            </tr>
+
+            <tr>
+                <td class="pk">id</td>
+                <td>INTEGER</td>
+                <td>Nej</td>
+                <td></td>
+                <td>Ja</td>
+            </tr>
+            <tr>
+                <td>situation</td>
+                <td>TEXT</td>
+                <td>Ja</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+            <tr>
+                <td>position_id</td>
+                <td>INTEGER</td>
+                <td>Nej</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+            <tr>
+                <td>parent_id</td>
+                <td>INTEGER</td>
+                <td>Nej</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+            <tr>
+                <td>node_path</td>
+                <td>TEXT</td>
+                <td>Ja</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+        </table>
+
+        <h3>Foreign Keys</h3>
+        <table>
+            <tr>
+                <th>Från kolumn</th>
+                <th>Till tabell</th>
+                <th>Till kolumn</th>
+            </tr>
+
+            <tr>
+                <td>nodes</td>
+                <td>parent_id</td>
+                <td>id</td>
+            </tr>
+            <tr>
+                <td>positions</td>
+                <td>position_id</td>
+                <td>id</td>
+            </tr>
+        </table>
+
+        <h3>Dataexempel</h3>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>situation</th>
+                <th>position_id</th>
+                <th>parent_id</th>
+                <th>node_path</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td></td>
+                <td>1</td>
+                <td>None</td>
+                <td>_utg</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>ffffc</td>
+                <td>6</td>
+                <td>1</td>
+                <td>ffffc_bb</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>ffffr35r100</td>
+                <td>5</td>
+                <td>1</td>
+                <td>ffffr35r100_sb</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>ffffr35</td>
+                <td>6</td>
+                <td>1</td>
+                <td>ffffr35_bb</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>ffff</td>
+                <td>5</td>
+                <td>1</td>
+                <td>ffff_sb</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="table-container" id="hands">
+        <h2>Tabell: hands</h2>
+        
+        <h3>Kolumner</h3>
+        <table>
+            <tr>
+                <th>Namn</th>
+                <th>Typ</th>
+                <th>Not Null</th>
+                <th>Default</th>
+                <th>Primary Key</th>
+            </tr>
+
+            <tr>
+                <td class="pk">id</td>
+                <td>INTEGER</td>
+                <td>Nej</td>
+                <td></td>
+                <td>Ja</td>
+            </tr>
+            <tr>
+                <td>hand_code</td>
+                <td>TEXT</td>
+                <td>Ja</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+            <tr>
+                <td>canonical_code</td>
+                <td>TEXT</td>
+                <td>Ja</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+            <tr>
+                <td>first_rank</td>
+                <td>TEXT</td>
+                <td>Ja</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+            <tr>
+                <td>first_suit</td>
+                <td>TEXT</td>
+                <td>Ja</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+            <tr>
+                <td>second_rank</td>
+                <td>TEXT</td>
+                <td>Ja</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+            <tr>
+                <td>second_suit</td>
+                <td>TEXT</td>
+                <td>Ja</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+        </table>
+
+        <h3>Dataexempel</h3>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>hand_code</th>
+                <th>canonical_code</th>
+                <th>first_rank</th>
+                <th>first_suit</th>
+                <th>second_rank</th>
+                <th>second_suit</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2d2c</td>
+                <td>2c2d</td>
+                <td>2</td>
+                <td>c</td>
+                <td>2</td>
+                <td>d</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2h2c</td>
+                <td>2c2h</td>
+                <td>2</td>
+                <td>c</td>
+                <td>2</td>
+                <td>h</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>2h2d</td>
+                <td>2d2h</td>
+                <td>2</td>
+                <td>d</td>
+                <td>2</td>
+                <td>h</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>2s2c</td>
+                <td>2c2s</td>
+                <td>2</td>
+                <td>c</td>
+                <td>2</td>
+                <td>s</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>2s2d</td>
+                <td>2d2s</td>
+                <td>2</td>
+                <td>d</td>
+                <td>2</td>
+                <td>s</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="table-container" id="strategies">
+        <h2>Tabell: strategies</h2>
+        
+        <h3>Kolumner</h3>
+        <table>
+            <tr>
+                <th>Namn</th>
+                <th>Typ</th>
+                <th>Not Null</th>
+                <th>Default</th>
+                <th>Primary Key</th>
+            </tr>
+
+            <tr>
+                <td class="pk">id</td>
+                <td>INTEGER</td>
+                <td>Nej</td>
+                <td></td>
+                <td>Ja</td>
+            </tr>
+            <tr>
+                <td>node_id</td>
+                <td>INTEGER</td>
+                <td>Nej</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+            <tr>
+                <td>hand_id</td>
+                <td>INTEGER</td>
+                <td>Nej</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+            <tr>
+                <td>action_type_id</td>
+                <td>INTEGER</td>
+                <td>Nej</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+            <tr>
+                <td>action_code</td>
+                <td>TEXT</td>
+                <td>Ja</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+            <tr>
+                <td>raise_amount</td>
+                <td>REAL</td>
+                <td>Nej</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+            <tr>
+                <td>frequency</td>
+                <td>REAL</td>
+                <td>Ja</td>
+                <td></td>
+                <td>Nej</td>
+            </tr>
+        </table>
+
+        <h3>Foreign Keys</h3>
+        <table>
+            <tr>
+                <th>Från kolumn</th>
+                <th>Till tabell</th>
+                <th>Till kolumn</th>
+            </tr>
+
+            <tr>
+                <td>actions</td>
+                <td>action_type_id</td>
+                <td>id</td>
+            </tr>
+            <tr>
+                <td>hands</td>
+                <td>hand_id</td>
+                <td>id</td>
+            </tr>
+            <tr>
+                <td>nodes</td>
+                <td>node_id</td>
+                <td>id</td>
+            </tr>
+        </table>
+
+        <h3>Dataexempel</h3>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>node_id</th>
+                <th>hand_id</th>
+                <th>action_type_id</th>
+                <th>action_code</th>
+                <th>raise_amount</th>
+                <th>frequency</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+                <td>4</td>
+                <td>r35</td>
+                <td>3.5</td>
+                <td>0.4553</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2</td>
+                <td>2</td>
+                <td>4</td>
+                <td>r35</td>
+                <td>3.5</td>
+                <td>0.4553</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>r35</td>
+                <td>3.5</td>
+                <td>0.4553</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>2</td>
+                <td>4</td>
+                <td>4</td>
+                <td>r35</td>
+                <td>3.5</td>
+                <td>0.4553</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>2</td>
+                <td>5</td>
+                <td>4</td>
+                <td>r35</td>
+                <td>3.5</td>
+                <td>0.4553</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</body>
+</html>
