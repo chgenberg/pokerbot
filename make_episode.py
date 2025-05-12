@@ -28,7 +28,12 @@ app = FastAPI()
 # Tillåt frontend att prata med backend (CORS)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:8080", "http://127.0.0.1:8080"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:8080",
+        "http://127.0.0.1:8080",
+        "https://pokerbot-bot.onrender.com"  # <-- Detta är din frontend-URL, om det är där din React-app körs!
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
