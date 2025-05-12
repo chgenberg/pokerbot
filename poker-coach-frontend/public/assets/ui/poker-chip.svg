@@ -1,0 +1,18 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round">
+
+  <!-- Bakre kort: K♥ -->
+  <rect x="22" y="22" width="36" height="50" rx="3" fill="#fff" stroke="#23173a" stroke-width="3"></rect>
+  <text x="28" y="40" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#c62828">K</text>
+  <text x="38" y="54" font-family="Arial, sans-serif" font-size="12" fill="#c62828">♥</text>
+
+  <!-- Främre kort: A♥ (lite förskjutet) -->
+  <rect x="38" y="26" width="36" height="50" rx="3" fill="#fff" stroke="#23173a" stroke-width="3"></rect>
+  <text x="44" y="44" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#c62828">A</text>
+  <text x="54" y="58" font-family="Arial, sans-serif" font-size="12" fill="#c62828">♥</text>
+
+  <!-- Frågetecken ovanför -->
+  <path d="M64 16c0-5 3-7 6-7s6 2 6 7-6 5-6 10" stroke="#23173a" stroke-width="4" fill="none"></path>
+  <circle cx="70" cy="32" r="2.5" fill="#23173a"></circle>
+
+</svg>
