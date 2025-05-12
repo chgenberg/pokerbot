@@ -6,3 +6,4 @@
    tqdm
    aiohttp
    elevenlabs
+   python-multipart
