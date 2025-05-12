@@ -92,7 +92,7 @@ export default function ChatInterface() {
     abortRef.current = new AbortController();
 
     try {
-      const res = await fetch(`${API_URL}/chat`, {
+      const res = await fetch(`${API_URL}/ask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-Mode': state.mode, 'X-Skill-Level': state.skill || '' },
         body: JSON.stringify({ question: text, chat_history: state.messages.map(m => [m.sender, m.text]) }),
